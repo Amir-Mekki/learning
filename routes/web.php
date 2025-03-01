@@ -1,16 +1,35 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
+use Illuminate\Support\Facades\Auth;
+
+require base_path('app/Modules/Auth/Routes/web.php');
+require base_path('app/Modules/Courses/Routes/web.php');
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/login', [AuthController::class, 'login'])->name('login');
-Route::get('/callback', [AuthController::class, 'callback']);
-Route::get('/logout', [AuthController::class, 'logout']);
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard', function () {
+        return 'Dashboard';
+    });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware('auth:keycloak');
+    // Group routes for Admin
+    Route::middleware(['keycloak-web-can:admin'])->prefix('admin')->group(function () {
+        Route::get('/', function () {
+            return 'Admin Dashboard';
+        });
+        Route::get('/settings', function () {
+            return 'Admin Settings';
+        });
+    });
+
+    // Group routes for Teacher
+    Route::middleware(['keycloak-web-can:teacher'])->prefix('teacher')->group(function () {
+        Route::get('/', function () {
+            return 'Teacher Dashboard';
+        });
+    });
+
+});

@@ -2,5 +2,6 @@
 
 return [
     App\Providers\AppServiceProvider::class,
-    KeycloakGuard\KeycloakServiceProvider::class,
+    App\Modules\Auth\Providers\AuthServiceProvider::class,
+    App\Modules\Courses\Providers\CourseServiceProvider::class,
 ];

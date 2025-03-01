@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->string('keycloak_id')->unique()->nullable();
+        Schema::table('sessions', function (Blueprint $table) {
+            $table->string('user_id', 255)->change();
         });
     }
 
@@ -21,8 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('keycloak_id');
+        Schema::table('sessions', function (Blueprint $table) {
+            $table->integer('user_id')->change();
         });
     }
 };

@@ -37,11 +37,7 @@ return [
 
     'guards' => [
         'web' => [
-            'driver' => 'session',
-            'provider' => 'users',
-        ],
-        'keycloak' => [
-            'driver' => 'keycloak',
+            'driver' => 'keycloak-web',
             'provider' => 'users',
         ],
     ],
@@ -62,14 +58,19 @@ return [
     | Supported: "database", "eloquent"
     |
     */
-    
+
     'providers' => [
         'users' => [
-            'driver' => 'eloquent',
+            'driver' => 'keycloak-users',
             'model' => App\Models\User::class,
         ],
+
+        // 'users' => [
+        //     'driver' => 'database',
+        //     'table' => 'users',
+        // ],
     ],
-    
+
     /*
     |--------------------------------------------------------------------------
     | Resetting Passwords
@@ -111,15 +112,4 @@ return [
 
     'password_timeout' => env('AUTH_PASSWORD_TIMEOUT', 10800),
 
-    'services' => [
-        'keycloak' => [
-            'base_url' => env('KEYCLOAK_SERVER_URL'),
-            'realm' => env('KEYCLOAK_REALM'),
-            'client_id' => env('KEYCLOAK_CLIENT_ID'),
-            'client_secret' => env('KEYCLOAK_CLIENT_SECRET'),
-            'redirect_uri' => env('KEYCLOAK_REDIRECT_URI'),
-            'logout_redirect_uri' => env('KEYCLOAK_LOGOUT_REDIRECT'),
-            'allow_unsafe_url' => env('KEYCLOAK_ALLOW_UNSAFE', false),
-        ],
-    ],
 ];
