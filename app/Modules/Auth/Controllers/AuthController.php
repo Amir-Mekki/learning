@@ -1,5 +1,5 @@
 <?php
-namespace App\Http\Controllers;
+namespace App\Modules\Auth\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -9,11 +9,6 @@ use App\Models\User;
 
 class AuthController extends Controller
 {
-    // public function login()
-    // {
-    //     return Auth::guard('keycloak')->redirect();
-    // }
-
     public function login()
     {
         $query = http_build_query([
@@ -64,15 +59,15 @@ class AuthController extends Controller
             ['name' => $userData['name'], 'keycloak_id' => $userData['sub']]
         );
 
-        Auth::guard('web')->login($user);
-                // dd(Auth::check());
-        return redirect('/dashboard');
+        Auth::setUser($user);
+
+        return response()->json($accessToken);
     }
 
 
     public function logout()
     {
-        Auth::guard('keycloak')->logout();
-        return redirect('/');
+        Auth::setUser(null);
+        return response()->json("Done");
     }
 }

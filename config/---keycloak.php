@@ -36,4 +36,6 @@ return [
     'logout_redirect_uri' => env('KEYCLOAK_LOGOUT_REDIRECT'),
     
     'public_key' => env('KEYCLOAK_PUBLIC_KEY'),
+    
+    'realm_public_key' => env('KEYCLOAK_PUBLIC_KEY'),
 ];

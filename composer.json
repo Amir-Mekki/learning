@@ -7,9 +7,11 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "darkaonline/l5-swagger": "*",
         "laravel/framework": "^11.31",
         "laravel/tinker": "^2.9",
-        "robsontenorio/laravel-keycloak-guard": "^1.6"
+        "robsontenorio/laravel-keycloak-guard": "^1.6",
+        "zircote/swagger-php": "*"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",

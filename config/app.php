@@ -123,7 +123,4 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
-    'aliases' => [
-        'Keycloak' => \KeycloakGuard\Facades\Keycloak::class,
-    ],
 ];
